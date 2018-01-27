@@ -42,6 +42,18 @@ class Player
 
         $playersCount = $this->activePlayersCount($gameState);
 
+        if ($this->hasHighCard($gameState, 11)) {
+            $random = $random - 10;
+        }
+
+        if ($this->hasPair($gameState, 11) && !$this->hasCommunityCards($gameState)) {
+            $random = $random - 30;
+        }
+
+        if ($this->hasCommunityCards($gameState) && $this->hasPairWithCommunityCards($gameState, 11)) {
+            $random = $random - 15;
+        }
+
         if ($playersCount == 4){
             if ($random < 0){
                 $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
@@ -159,7 +171,7 @@ class Player
     public function hasHighCard($gameState, $limit = 12){
         $holeCards = $this->getHoleCards($gameState);
 
-        return ($holeCards[0]['rank'] >= $limit) || ($holeCards[1]['rank'] >= $limit);
+        return ($holeCards[0]['rank'] >= $limit) && ($holeCards[1]['rank'] >= $limit);
     }
 
     public function hasPair($gameState, $limit = 2)
