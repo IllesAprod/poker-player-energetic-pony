@@ -184,6 +184,14 @@ EOL;
         $this->assertTrue($response);
     }
 
+    /** @test */
+    public function has_pair_with_community_cards()
+    {
+        $player = new \Player();
+        $response = $player->hasPairWithCommunityCards($this->gameState);
+        $this->assertTrue($response);
+    }
+
 }
 
 

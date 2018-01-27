@@ -7,16 +7,21 @@ class Player
     public function betRequest($gameState)
     {
 
-        if ($this->hasPair($gameState, 2)){
+        if ($this->hasPair($gameState, 6)){
             $this->log('PAIR TACTICS');
             return 10000;
         }
 
-        if ($this->hasHighCard($gameState, 11)){
+        if ($this->hasHighCard($gameState, 11) && !$this->hasCommunityCards($gameState)){
             if ($this->minimumBet($gameState) < $this->bigBlind($gameState)){
                 $this->log('HIGHCARD TACTICS');
                 return $this->minimumBet($gameState);
             }
+        }
+
+        if ($this->hasHighCard($gameState, 11) && $this->hasCommunityCards($gameState) && $this->hasPairWithCommunityCards($gameState, 11)){
+            $this->log('HAS PAIR WITH COMMUNITY');
+            return $this->minimumBet($gameState);
         }
 
         if ($this->activePlayersCount($gameState) > 2){
@@ -26,7 +31,7 @@ class Player
         }
 
 
-        if ($this->hasPair($gameState, 2)){
+        if ($this->hasPair($gameState, 8)){
             $this->log('2 player and have pair');
             return 10000;
         }
@@ -143,11 +148,24 @@ class Player
     public function hasPairWithCommunityCards($gameState, $limit = 2)
     {
         $holeCards = $this->getHoleCards($gameState);
-        $communityCards = $this->getHoleCards($gameState);
+        $communityCards = $this->getCommunityCards($gameState);
 
+        $cards = array_merge($holeCards, $communityCards);
 
-        if (($cards[0]['rank'] == $cards[1]['rank']) && $cards[0]['rank'] >= $limit){
-            return true;
+        $aggregated = [];
+
+        foreach ($cards as $card){
+            if (isset($aggregated[$card['rank']])){
+                $aggregated[$card['rank']] += 1;
+            } else {
+                $aggregated[$card['rank']] = 1;
+            }
+        }
+
+        foreach ($aggregated as $index => $a){
+            if ($a >1 && $index > $limit){
+                return true;
+            }
         }
 
         return false;
@@ -167,4 +185,11 @@ class Player
     public function bigBlind($gameState){
         return $gameState['small_blind'] * 2;
     }
+
+    public function hasCommunityCards($gameState)
+    {
+        return boolval(count($gameState['community_cards']));
+    }
+
+
 }
