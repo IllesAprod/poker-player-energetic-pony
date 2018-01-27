@@ -105,6 +105,6 @@ class Player
     }
 
     public function log($message) {
-        file_put_contents("php://stderr", $message);
+        file_put_contents("php://stderr", '####THIS###' . $message);
     }
 }
