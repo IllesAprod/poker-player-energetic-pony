@@ -13,10 +13,10 @@ class Player
         }
 
         if ($this->hasHighCard($gameState, 11) && !$this->hasCommunityCards($gameState)){
-            if ($this->minimumBet($gameState) < $this->bigBlind($gameState)){
-                $this->log('HIGHCARD TACTICS');
-                return $this->minimumBet($gameState);
-            }
+            $this->log('HIGHCARD TACTICS minimum bet: ' .  $this->minimumBet($gameState) . ' current buy in ' . $gameState['current_buy_in']);
+
+
+            return $this->minimumBet($gameState);
         }
 
         if ($this->hasHighCard($gameState, 11) && $this->hasCommunityCards($gameState) && $this->hasPairWithCommunityCards($gameState, 11)){
