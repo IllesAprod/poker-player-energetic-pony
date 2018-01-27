@@ -93,7 +93,7 @@ EOL;
               "bet": 320
           },
           {
-              "id": 2,
+              "id": 1,
               "name": "Bob",
               "status": "active",
               "version": "Default random player",
@@ -101,11 +101,11 @@ EOL;
               "bet": 80,
               "hole_cards": [
                   {
-                      "rank": "6",
+                      "rank": "10",
                       "suit": "hearts"
                   },
                   {
-                      "rank": "K",
+                      "rank": "10",
                       "suit": "spades"
                   }
               ]
@@ -145,8 +145,31 @@ EOL;
     public function it_folds_if_we_have_more_than_one_active_players()
     {
         $player = new \Player();
-        $response = $player->betRequest($this->gameState2);
+        $response = $player->betRequest($this->gameState);
         $this->assertTrue($response == 0);
+    }
+
+
+    /** @test */
+    public function it_returns_player(){
+        $player = new \Player();
+        $player = $player->getPlayer($this->gameState2);
+        $this->assertTrue($player == $this->gameState2['players'][1]);
+    }
+
+    /** @test */
+    public function it_returns_hole_cards(){
+        $player = new \Player();
+        $holeCards = $player->getHoleCards($this->gameState2);
+        $this->assertTrue($holeCards == $this->gameState2['players'][1]['hole_cards']);
+    }
+
+    /** @test */
+    public function it_all_in_if_we_have_pair()
+    {
+        $player = new \Player();
+        $response = $player->betRequest($this->gameState2);
+        $this->assertTrue($response == 10000);
     }
 }
 
