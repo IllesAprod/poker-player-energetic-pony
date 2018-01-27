@@ -12,7 +12,7 @@ class Player
             return 10000;
         }
 
-        if ($this->hasHighCard($gameState, 11)){
+        if ($this->hasHighCard($gameState, 11) && !$this->hasCommunityCards($gameState)){
             $this->log('HIGHCARD TACTICS minimum bet: ' .  $this->minimumBet($gameState) . ' current buy in ' . $gameState['current_buy_in']);
             return $this->minimumBet($gameState);
         }
