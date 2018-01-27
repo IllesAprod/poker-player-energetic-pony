@@ -7,7 +7,7 @@ class Player
     public function betRequest($gameState)
     {
 
-        if ($this->hasPair($gameState, 8)){
+        if ($this->hasPair($gameState, 2)){
             $this->log('PAIR TACTICS');
             return 10000;
         }
@@ -19,7 +19,7 @@ class Player
         }
 
 
-        if ($this->hasPair($gameState, 5)){
+        if ($this->hasPair($gameState, 2)){
             $this->log('2 player and have pair');
             return 10000;
         }
