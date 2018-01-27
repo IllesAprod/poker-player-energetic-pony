@@ -43,21 +43,21 @@ class Player
         $playersCount = $this->activePlayersCount($gameState);
 
         if ($playersCount == 4){
-            if ($random < 10){
+            if ($random < 0){
                 $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
                 return 10000;
             }
         }
 
         if ($playersCount == 3){
-            if ($random < 20){
+            if ($random < 15){
                 $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
                 return 10000;
             }
         }
 
         if ($playersCount == 2){
-            if ($random < 60){
+            if ($random < 75){
                 $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
                 return 10000;
             }
