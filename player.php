@@ -62,24 +62,29 @@ class Player
             $random = $random - 15;
         }
 
+        if ($random < 0){
+            $random = 0;
+        }
+
         if ($playersCount == 4){
-            if ($random < 0){
+            if ($random == 0){
                 $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
-                return 10000;
+
+                return $this->getPlayer($gameState)['stack'] * (100-$random);
             }
         }
 
         if ($playersCount == 3){
             if ($random < 15){
                 $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
-                return 10000;
+                return $this->getPlayer($gameState)['stack'] * (100-$random);
             }
         }
 
         if ($playersCount == 2){
             if ($random < 75){
                 $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
-                return 10000;
+                return $this->getPlayer($gameState)['stack'] * (100-$random);
             }
         }
 
