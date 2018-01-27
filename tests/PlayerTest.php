@@ -3,7 +3,7 @@
 require __DIR__ . '/../player.php';
 
 
-class GameStateTest extends \PHPUnit\Framework\TestCase {
+class PlayerTest extends \PHPUnit\Framework\TestCase {
 
     private $gameState = <<<EOL
   {
@@ -128,6 +128,10 @@ EOL;
   }
 EOL;
 
+    public function setUp(){
+        $this->gameState = json_decode($this->gameState, true);
+        $this->gameState2 = json_decode($this->gameState2, true);
+    }
 
     /** @test */
     public function it_returns_an_integer()
@@ -135,6 +139,14 @@ EOL;
         $player = new \Player();
         $response = $player->betRequest($this->gameState);
         $this->assertTrue(is_integer($response));
+    }
+
+    /** @test */
+    public function it_folds_if_we_have_more_than_one_active_players()
+    {
+        $player = new \Player();
+        $response = $player->betRequest($this->gameState2);
+        $this->assertTrue($response == 0);
     }
 }
 
