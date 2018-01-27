@@ -12,12 +12,12 @@ class Player
             return 10000;
         }
 
-//        if ($this->hasHighCard($gameState, 11)){
-//            if ($this->minimumBet($gameState) < $this->bigBlind()){
-//                $this->log('HIGHCARD TACTICS');
-//                return $this->minimumBet($gameState);
-//            }
-//        }
+        if ($this->hasHighCard($gameState, 11)){
+            if ($this->minimumBet($gameState) < $this->bigBlind($gameState)){
+                $this->log('HIGHCARD TACTICS');
+                return $this->minimumBet($gameState);
+            }
+        }
 
         if ($this->activePlayersCount($gameState) > 2){
             $this->log('MORE THAN 2 ACTIVE PLAYERS, FOLD');

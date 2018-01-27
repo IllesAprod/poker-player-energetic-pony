@@ -176,6 +176,13 @@ EOL;
         $this->assertTrue($response == 10000);
     }
 
+    /** @test */
+    public function it_has_high_card()
+    {
+        $player = new \Player();
+        $response = $player->hasHighCard($this->gameState2);
+        $this->assertTrue($response);
+    }
 
 }
 
