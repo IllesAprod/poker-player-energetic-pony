@@ -44,11 +44,11 @@ class PlayerTest extends \PHPUnit\Framework\TestCase {
               "bet": 80,
               "hole_cards": [
                   {
-                      "rank": "4",
+                      "rank": "A",
                       "suit": "hearts"
                   },
                   {
-                      "rank": "Q",
+                      "rank": "10",
                       "suit": "spades"
                   }
               ]

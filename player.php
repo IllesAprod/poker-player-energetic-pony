@@ -75,7 +75,7 @@ class Player
         }
 
         if ($playersCount == 3){
-            if ($random < 15){
+            if ($random < 5){
                 $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
                 return $this->getPlayer($gameState)['stack'] * (100-$random);
             }
