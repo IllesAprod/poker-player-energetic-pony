@@ -7,12 +7,17 @@ class Player
     public function betRequest($gameState)
     {
         if ($this->hasPair($gameState, 8)){
+            $this->log('PAIR TACTICS');
             return 10000;
         }
 
         if ($this->activePlayersCount($gameState) > 2){
+            $this->log('MORE THAN 2 ACTIVE PLAYERS, FOLD');
+
             return 0;
         }
+
+        $this->log('ALL IN');
 
         return 10000;
     }
@@ -88,5 +93,9 @@ class Player
         }
 
         return false;
+    }
+
+    public function log($message) {
+        file_put_contents("php://stderr", $message);
     }
 }
