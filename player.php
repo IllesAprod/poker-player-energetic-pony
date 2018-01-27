@@ -42,6 +42,14 @@ class Player
 
         $playersCount = $this->activePlayersCount($gameState);
 
+        if ($this->bigBlind($gameState) > 200){
+            $random = $random - 10;
+        }
+
+        if ($this->bigBlind($gameState) > 400){
+            $random = $random - 10;
+        }
+
         if ($this->hasHighCard($gameState, 11)) {
             $random = $random - 10;
         }
