@@ -67,17 +67,29 @@ class Player
         }
 
         if ($playersCount == 4){
-            if ($random == 0){
-                $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
+//            if ($random == 0){
+//                $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
+//
+//                return $this->getPlayer($gameState)['stack'] * (100-$random);
+//            }
 
-                return $this->getPlayer($gameState)['stack'] * (100-$random);
+            if ($gameState['current_buy_in'] > $this->bigBlind($gameState)){
+                return 0;
+            } else {
+                return $this->minimumBet($gameState) + $gameState['minimum_raise'];
             }
         }
 
         if ($playersCount == 3){
-            if ($random < 5){
-                $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
-                return $this->getPlayer($gameState)['stack'] * (100-$random);
+//            if ($random < 5){
+//                $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
+//                return $this->getPlayer($gameState)['stack'] * (100-$random);
+//            }
+
+            if ($gameState['current_buy_in'] > $this->bigBlind($gameState)){
+                return 0;
+            } else {
+                return $this->minimumBet($gameState) + $gameState['minimum_raise'];
             }
         }
 
