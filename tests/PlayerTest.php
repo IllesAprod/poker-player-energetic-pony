@@ -48,7 +48,7 @@ class PlayerTest extends \PHPUnit\Framework\TestCase {
                       "suit": "hearts"
                   },
                   {
-                      "rank": "K",
+                      "rank": "Q",
                       "suit": "spades"
                   }
               ]
@@ -144,13 +144,13 @@ EOL;
         $this->assertTrue(is_integer($response));
     }
 
-    /** @test */
-    public function it_folds_if_we_have_more_than_one_active_players()
-    {
-        $player = new \Player();
-        $response = $player->betRequest($this->gameState);
-        $this->assertTrue($response == 0);
-    }
+//    /** @test */
+//    public function it_folds_if_we_have_more_than_one_active_players()
+//    {
+//        $player = new \Player();
+//        $response = $player->betRequest($this->gameState);
+//        $this->assertTrue($response == 0);
+//    }
 
 
     /** @test */
@@ -180,7 +180,7 @@ EOL;
     public function it_has_high_card()
     {
         $player = new \Player();
-        $response = $player->hasHighCard($this->gameState2);
+        $response = $player->hasHighCard($this->gameState, 11);
         $this->assertTrue($response);
     }
 

@@ -12,10 +12,8 @@ class Player
             return 10000;
         }
 
-        if ($this->hasHighCard($gameState, 11) && !$this->hasCommunityCards($gameState)){
+        if ($this->hasHighCard($gameState, 11)){
             $this->log('HIGHCARD TACTICS minimum bet: ' .  $this->minimumBet($gameState) . ' current buy in ' . $gameState['current_buy_in']);
-
-
             return $this->minimumBet($gameState);
         }
 
@@ -92,7 +90,7 @@ class Player
             }
 
             $cards[] = [
-              'rank' => $rank,
+              'rank' => intval($rank),
               'suit' => $holeCard['suit'],
             ];
         }
@@ -120,7 +118,7 @@ class Player
             }
 
             $cards[] = [
-                'rank' => $rank,
+                'rank' => intval($rank),
                 'suit' => $holeCard['suit'],
             ];
         }
@@ -131,7 +129,7 @@ class Player
     public function hasHighCard($gameState, $limit = 12){
         $holeCards = $this->getHoleCards($gameState);
 
-        return ($holeCards[0]['rank'] > $limit) || ($holeCards[0]['rank']) > $limit;
+        return ($holeCards[0]['rank'] >= $limit) || ($holeCards[1]['rank'] >= $limit);
     }
 
     public function hasPair($gameState, $limit = 2)
