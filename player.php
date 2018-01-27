@@ -44,21 +44,26 @@ class Player
 
         if ($playersCount == 4){
             if ($random < 10){
+                $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
                 return 10000;
             }
         }
 
         if ($playersCount == 3){
             if ($random < 20){
+                $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
                 return 10000;
             }
         }
 
         if ($playersCount == 2){
             if ($random < 60){
+                $this->log('PLAYERS: ' . $playersCount . ' RAND: ' . $random);
                 return 10000;
             }
         }
+
+        $this->log('RETURN 0 PLAYERS: ' . $playersCount . ' RAND: ' . $random);
 
         return 0;
 
