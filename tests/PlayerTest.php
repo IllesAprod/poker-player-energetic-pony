@@ -44,7 +44,7 @@ class PlayerTest extends \PHPUnit\Framework\TestCase {
               "bet": 80,
               "hole_cards": [
                   {
-                      "rank": "6",
+                      "rank": "4",
                       "suit": "hearts"
                   },
                   {
@@ -55,18 +55,7 @@ class PlayerTest extends \PHPUnit\Framework\TestCase {
           }
       ],
       "community_cards": [
-          {
-              "rank": "4",
-              "suit": "spades"
-          },
-          {
-              "rank": "A",
-              "suit": "hearts"
-          },
-          {
-              "rank": "6",
-              "suit": "clubs"
-          }
+
       ]
   }
 EOL;

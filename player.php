@@ -7,34 +7,59 @@ class Player
     public function betRequest($gameState)
     {
 
-        if ($this->hasPair($gameState, 6)){
-            $this->log('PAIR TACTICS');
-            return 10000;
+//        if ($this->hasPair($gameState, 6)){
+//            $this->log('PAIR TACTICS');
+//            return 10000;
+//        }
+//
+//        if ($this->hasHighCard($gameState, 11) && !$this->hasCommunityCards($gameState)){
+//            $this->log('HIGHCARD TACTICS minimum bet: ' .  $this->minimumBet($gameState) . ' current buy in ' . $gameState['current_buy_in']);
+//
+//            return $this->minimumBet($gameState);
+//        }
+//
+//        if ($this->hasHighCard($gameState, 11) && $this->hasCommunityCards($gameState) && $this->hasPairWithCommunityCards($gameState, 11)){
+//            $this->log('HAS PAIR WITH COMMUNITY');
+//            return $this->minimumBet($gameState);
+//        }
+//
+//        if ($this->activePlayersCount($gameState) > 2){
+//            $this->log('MORE THAN 2 ACTIVE PLAYERS, FOLD');
+//
+//            return 0;
+//        }
+//
+//
+//        if ($this->hasPair($gameState, 8)){
+//            $this->log('2 player and have pair');
+//            return 10000;
+//        }
+//
+//        $this->log('2 player and dont have pair');
+//        return 0;
+
+        $random = rand(0,100);
+
+        $playersCount = $this->activePlayersCount($gameState);
+
+        if ($playersCount == 4){
+            if ($random < 10){
+                return 10000;
+            }
         }
 
-        if ($this->hasHighCard($gameState, 11) && !$this->hasCommunityCards($gameState)){
-            $this->log('HIGHCARD TACTICS minimum bet: ' .  $this->minimumBet($gameState) . ' current buy in ' . $gameState['current_buy_in']);
-            return $this->minimumBet($gameState);
+        if ($playersCount == 3){
+            if ($random < 20){
+                return 10000;
+            }
         }
 
-        if ($this->hasHighCard($gameState, 11) && $this->hasCommunityCards($gameState) && $this->hasPairWithCommunityCards($gameState, 11)){
-            $this->log('HAS PAIR WITH COMMUNITY');
-            return $this->minimumBet($gameState);
+        if ($playersCount == 2){
+            if ($random < 60){
+                return 10000;
+            }
         }
 
-        if ($this->activePlayersCount($gameState) > 2){
-            $this->log('MORE THAN 2 ACTIVE PLAYERS, FOLD');
-
-            return 0;
-        }
-
-
-        if ($this->hasPair($gameState, 8)){
-            $this->log('2 player and have pair');
-            return 10000;
-        }
-
-        $this->log('2 player and dont have pair');
         return 0;
 
     }
