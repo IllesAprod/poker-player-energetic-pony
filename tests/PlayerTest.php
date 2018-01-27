@@ -101,11 +101,11 @@ EOL;
               "bet": 80,
               "hole_cards": [
                   {
-                      "rank": "10",
+                      "rank": "A",
                       "suit": "hearts"
                   },
                   {
-                      "rank": "10",
+                      "rank": "A",
                       "suit": "spades"
                   }
               ]
@@ -128,9 +128,12 @@ EOL;
   }
 EOL;
 
+
     public function setUp(){
         $this->gameState = json_decode($this->gameState, true);
         $this->gameState2 = json_decode($this->gameState2, true);
+        $this->gameState3 = json_decode($this->gameState3, true);
+
     }
 
     /** @test */
@@ -161,7 +164,8 @@ EOL;
     public function it_returns_hole_cards(){
         $player = new \Player();
         $holeCards = $player->getHoleCards($this->gameState2);
-        $this->assertTrue($holeCards == $this->gameState2['players'][1]['hole_cards']);
+
+        $this->assertTrue($holeCards[0]['rank'] == 14);
     }
 
     /** @test */
@@ -171,6 +175,8 @@ EOL;
         $response = $player->betRequest($this->gameState2);
         $this->assertTrue($response == 10000);
     }
+
+
 }
 
 

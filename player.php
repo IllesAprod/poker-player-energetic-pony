@@ -6,6 +6,7 @@ class Player
 
     public function betRequest($gameState)
     {
+
         if ($this->hasPair($gameState, 8)){
             $this->log('PAIR TACTICS');
             return 10000;
@@ -84,7 +85,7 @@ class Player
             ];
         }
 
-        return $holeCards;
+        return $cards;
     }
 
     /*public function hasHighCard($gameState){
@@ -105,6 +106,6 @@ class Player
     }
 
     public function log($message) {
-        file_put_contents("php://stderr", '####THIS###' . $message);
+        file_put_contents("php://stderr", '####THIS####  ' . $message);
     }
 }
