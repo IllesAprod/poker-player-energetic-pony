@@ -87,12 +87,12 @@ class Player
 //                return $this->getPlayer($gameState)['stack'] * (100-$random);
 //            }
 
-            if ($this->hasHighCard($gameState, 11) || ($this->hasPair($gameState, 11) && !$this->hasCommunityCards($gameState)) || ($this->hasCommunityCards($gameState) && $this->hasPairWithCommunityCards($gameState, 11))){
-                return $this->minimumBet($gameState) + $gameState['minimum_raise'];
-            }
-
             if ($gameState['current_buy_in'] > $this->bigBlind($gameState)){
-                return 0;
+                if ($this->hasHighCard($gameState, 11) || ($this->hasPair($gameState, 11) && !$this->hasCommunityCards($gameState)) || ($this->hasCommunityCards($gameState) && $this->hasPairWithCommunityCards($gameState, 11))){
+                    return $this->minimumBet($gameState) + $gameState['minimum_raise'];
+                } else {
+                    return 0;
+                }
             } else {
                 return $this->minimumBet($gameState) + $gameState['minimum_raise'];
             }
