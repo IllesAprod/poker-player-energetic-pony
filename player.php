@@ -17,9 +17,15 @@ class Player
             return 0;
         }
 
-        $this->log('ALL IN');
 
-        return 10000;
+        if ($this->hasPair($gameState, 5)){
+            $this->log('2 player and have pair');
+            return 10000;
+        }
+
+        $this->log('2 player and dont have pair');
+        return 0;
+
     }
 
     public function showdown($game_state)
@@ -30,13 +36,16 @@ class Player
     public function activePlayersCount($gameState){
         $sum = 0;
 
+        $outCount = 0;
+
         foreach ($gameState['players'] as $player){
-            if ($player['status'] == 'active'){
-                $sum++;
+            $sum++;
+            if ($player['status'] == 'out'){
+                $outCount++;
             }
         }
 
-        return $sum;
+        return $sum-$outCount;
     }
 
     public function getPlayer($gameState){
